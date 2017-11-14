@@ -25,7 +25,7 @@ public class Main {
         opencv_core.IplImage image = cvLoadImage("graph.png",CV_LOAD_IMAGE_GRAYSCALE);
         CanvasFrame canvas = new CanvasFrame("Test", 1); // gamma=1
         canvas.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        canvas.setCanvasSize(100, 100);
+        canvas.setCanvasSize(1000, 1000);
         OpenCVFrameConverter.ToIplImage converter = new OpenCVFrameConverter.ToIplImage();
         canvas.showImage(converter.convert(image));
 
@@ -35,13 +35,14 @@ public class Main {
 
         File fileImage = new File("graph.png");
         ITesseract instance = new Tesseract();
+        instance.setDatapath("/usr/local/Cellar/tesseract/3.05.01/share/");
 
         try{
             String result = instance.doOCR(fileImage);
             System.out.println(result);
 
         }catch(TesseractException e){
-            System.out.println(e.getMessage());
+            e.getStackTrace();
         }
 
     }
