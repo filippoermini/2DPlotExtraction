@@ -7,6 +7,8 @@ import org.bytedeco.javacpp.opencv_core;
 import org.bytedeco.javacv.CanvasFrame;
 import org.bytedeco.javacv.OpenCVFrameConverter;
 
+import it.unifi.annotation.Parser;
+
 import java.io.File;
 
 import static org.bytedeco.javacpp.opencv_imgcodecs.*;
@@ -18,6 +20,8 @@ public class Main {
 
     public static void main(String[] args){
 
+    	
+    		Parser.readStream();
         //----------//
         //  OpenCV  //
         //----------//
@@ -44,6 +48,5 @@ public class Main {
         }catch(TesseractException e){
             e.getStackTrace();
         }
-
     }
 }
