@@ -16,7 +16,7 @@ import it.unifi.domain.Annotation;
 
 public class Parser {
 
-	public static void readStream() {
+	public static void readStream(String Index) {
 	    try {
 	    		FileInputStream isInputStream = new FileInputStream(new File("annotations.json"));
 	        JsonReader reader = new JsonReader(new InputStreamReader(isInputStream, "UTF-8"));
@@ -27,7 +27,9 @@ public class Parser {
 	        while (reader.hasNext()) {
 	            // Read data into object model
 	            Annotation annotation = gson.fromJson(reader, Annotation.class);
-	            System.out.println("Stream mode: " + annotation);    
+	            if(annotation.getImage_index() == Integer.parseInt(Index)) {
+	            		System.out.println("Stream mode: " + annotation.toString());    
+	            }
 	        }
 	        reader.close();
 	    } catch (UnsupportedEncodingException ex) {

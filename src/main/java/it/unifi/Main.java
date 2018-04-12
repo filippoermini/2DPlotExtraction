@@ -20,13 +20,13 @@ public class Main {
 
     public static void main(String[] args){
 
-    	
-    		Parser.readStream();
+    		String index = args[0];
+    		Parser.readStream(index);
         //----------//
         //  OpenCV  //
         //----------//
-
-        opencv_core.IplImage image = cvLoadImage("graph.png",CV_LOAD_IMAGE_GRAYSCALE);
+    		/**
+        opencv_core.IplImage image = cvLoadImage(index+".png");
         CanvasFrame canvas = new CanvasFrame("Test", 1); // gamma=1
         canvas.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         canvas.setCanvasSize(1000, 1000);
@@ -37,7 +37,7 @@ public class Main {
         //  Tess4J  //
         //----------//
 
-        File fileImage = new File("graph.png");
+        File fileImage = new File(index+".png");
         ITesseract instance = new Tesseract();
         instance.setDatapath("/usr/local/Cellar/tesseract/3.05.01/share/");
 
@@ -48,5 +48,6 @@ public class Main {
         }catch(TesseractException e){
             e.getStackTrace();
         }
+        **/
     }
 }
