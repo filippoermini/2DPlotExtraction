@@ -2,13 +2,14 @@ package it.unifi.domain;
 
 public class ValueInfo {
 
-	private double[] values;
+
+	private String[] values;
 	private Bbox[] bboxes;
 	
-	public double[] getValues() {
+	public String      [] getValues() {
 		return values;
 	}
-	public void setValues(double[] values) {
+	public void setValues(String[] values) {
 		this.values = values;
 	}
 	public Bbox[] getBboxes() {
@@ -17,6 +18,7 @@ public class ValueInfo {
 	public void setBboxes(Bbox[] bboxes) {
 		this.bboxes = bboxes;
 	}
+	
 	
 	
 }

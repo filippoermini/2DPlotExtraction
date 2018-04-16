@@ -20,8 +20,8 @@ public class Main {
 
     public static void main(String[] args){
 
-    		String index = args[0];
-    		Parser.readStream(index);
+    	String index = args[0];
+    	Parser.readStream(index);
         //----------//
         //  OpenCV  //
         //----------//

@@ -8,7 +8,7 @@ import com.google.gson.internal.LinkedTreeMap;
 public class Annotation {
 
 	private String type;
-	private LinkedTreeMap<String, Object>[] models;
+	private Model[] models;
 	private GeneralFigureInfo general_figure_info;
 	private int image_index;
 	public String getType() {
@@ -17,10 +17,10 @@ public class Annotation {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Object[] getModels() {
+	public Model[] getModels() {
 		return models;
 	}
-	public void setModels(LinkedTreeMap<String, Object>[] models) {
+	public void setModels(Model[] models) {
 		this.models = models;
 	}
 	public Object getGeneral_figure_info() {
@@ -73,19 +73,6 @@ public class Annotation {
 			out += Casting(entry.getValue()) + "\n";
 		}
 		return out;
-	}
-	public String toString() {
-		String models = "";
-		for(LinkedTreeMap<String, Object> model: this.models) {
-			models += printDeepTreeMap(model);
-		}
-		String output=	"Type: "+this.type +"\n"+
-						"Image Index: "+this.image_index+"\n"+
-						"General Figure Info:"+ this.general_figure_info.toString()+"\n"+
-						"Modesls: "+this.models.length+"\n"+
-						"\t"+models; 
-		return output;
-		
 	}
 	
 	
