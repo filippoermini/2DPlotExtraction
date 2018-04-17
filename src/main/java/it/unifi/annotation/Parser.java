@@ -12,6 +12,8 @@ import com.google.gson.stream.JsonReader;
 import com.lowagie.text.pdf.codec.Base64.InputStream;
 
 import it.unifi.domain.Annotation;
+import it.unifi.domain.AnnotationLine;
+import it.unifi.domain.LineGraphList;
 
 
 public class Parser {
@@ -23,12 +25,17 @@ public class Parser {
 	        Gson gson = new GsonBuilder().create();
 
 	        // Read file in stream mode
+	        LineGraphList graphList = new LineGraphList();
 	        reader.beginArray();
 	        while (reader.hasNext()) {
 	            // Read data into object model
-	            Annotation annotation = gson.fromJson(reader, Annotation.class);
-	            if(annotation.getImage_index() == Integer.parseInt(Index)) {
-	            		System.out.println("Stream mode: " + annotation.toString());    
+	            try {
+	            	AnnotationLine annotationLine = gson.fromJson(reader, AnnotationLine.class);
+	            	if(annotationLine.getType().contentEquals("line")) {
+	            		graphList.getLineGraph().add(annotationLine);
+	            	}
+	            }catch(Exception e) {
+	            	System.out.println(e.getLocalizedMessage());
 	            }
 	        }
 	        reader.close();
