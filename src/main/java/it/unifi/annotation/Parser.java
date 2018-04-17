@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,14 +19,15 @@ import it.unifi.domain.LineGraphList;
 
 public class Parser {
 
-	public static void readStream(String Index) {
-	    try {
-	    		FileInputStream isInputStream = new FileInputStream(new File("annotations.json"));
+	public static LineGraphList readStream(String Index) {
+		LineGraphList graphList = new LineGraphList();
+		try {
+	    	
+	    	FileInputStream isInputStream = new FileInputStream(new File("annotations.json"));
 	        JsonReader reader = new JsonReader(new InputStreamReader(isInputStream, "UTF-8"));
 	        Gson gson = new GsonBuilder().create();
 
 	        // Read file in stream mode
-	        LineGraphList graphList = new LineGraphList();
 	        reader.beginArray();
 	        while (reader.hasNext()) {
 	            // Read data into object model
@@ -44,5 +46,6 @@ public class Parser {
 	    } catch (IOException ex) {
 	        
 	    }
+	    return graphList;
 	}
 }
