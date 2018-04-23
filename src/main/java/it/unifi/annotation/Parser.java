@@ -19,11 +19,11 @@ import it.unifi.domain.LineGraphList;
 
 public class Parser {
 
-	public static LineGraphList readStream(String Index) {
+	public static LineGraphList readStream(String fileName) {
 		LineGraphList graphList = new LineGraphList();
 		try {
 	    	
-	    	FileInputStream isInputStream = new FileInputStream(new File("annotations.json"));
+	    	FileInputStream isInputStream = new FileInputStream(new File(fileName));
 	        JsonReader reader = new JsonReader(new InputStreamReader(isInputStream, "UTF-8"));
 	        Gson gson = new GsonBuilder().create();
 
