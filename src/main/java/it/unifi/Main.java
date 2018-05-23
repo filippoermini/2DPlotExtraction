@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args){
 
-    	LineGraphList graphList = Parser.readStream("annotation1.json");
+    	LineGraphList graphList = Parser.readStream("annotations1.json");
    
         //----------------------------------//
     	//  Statistiche sul numero di linee	//
@@ -31,6 +31,6 @@ public class Main {
     	while (itMap.hasNext()) {
 	        HashMap.Entry<Integer,LineGraphList> pair = (HashMap.Entry)itMap.next();
 	        System.out.println("Linee " + pair.getKey() + " : " + pair.getValue().getLineGraph().size()+" Grafici");
-    	}
+    		}
     }
 }
