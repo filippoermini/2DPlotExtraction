@@ -15,6 +15,7 @@ import com.lowagie.text.pdf.codec.Base64.InputStream;
 import it.unifi.domain.Annotation;
 import it.unifi.domain.AnnotationLine;
 import it.unifi.domain.LineGraphList;
+import it.unifi.export.SampleMatrix;
 
 
 public class Parser {
@@ -35,6 +36,7 @@ public class Parser {
 	            	AnnotationLine annotationLine = gson.fromJson(reader, AnnotationLine.class);
 	            	if(annotationLine.getType().contentEquals("line")) {
 	            		graphList.getLineGraph().add(annotationLine);
+	            		
 	            	}
 	            }catch(Exception e) {
 	            	System.out.println(e.getLocalizedMessage());

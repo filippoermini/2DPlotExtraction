@@ -28,5 +28,13 @@ public class Sample {
 		BoundingBox = boundingBox;
 	}
 	
+	public void setValueAtIndex(double value,int index) {
+		this.ValueObject[index] = value;
+	}
+	
+	public void setBoxAtIndex(Bbox box, int index) {
+		this.BoundingBox[index] = box;
+	}
+	
 	
 }
