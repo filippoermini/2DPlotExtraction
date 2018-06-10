@@ -21,9 +21,12 @@ public class SampleMatrix {
 			Model model = annotation.getModels()[i];
 			for(int j=0;j<model.getBbox().length;j++) {
 				//i campionamenti sono sempre uno in più
+				double max = Math.max((Double) model.getY()[0],(Double) model.getY()[model.getY().length-1]);
+				double min = Math.min((Double) model.getY()[0],(Double) model.getY()[model.getY().length-1]);
 				double value = ((Double) model.getY()[j] + (Double) model.getY()[j+1]) / 2.0; 
+				double nomalizedValue = (value -min) / (max-min);
 				this.sampleArray[j].setBoxAtIndex(model.getBbox()[j], i);
-				this.sampleArray[j].setValueAtIndex(value, i);
+				this.sampleArray[j].setValueAtIndex(nomalizedValue, i);
 			}
 		}
 	}
