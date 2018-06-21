@@ -12,7 +12,7 @@ import it.unifi.domain.Model;
 public class SampleMatrix {
 	
 	private Sample[] sampleArray;
-	
+	private int index;
 	public SampleMatrix(int sample,int model) {
 		sampleArray = new Sample[sample];
 		for(int i=0;i<sample;i++) {
@@ -22,6 +22,7 @@ public class SampleMatrix {
 	}
 	
 	public void setSampleMatrix(AnnotationLine annotation) {
+		this.index = annotation.getImage_index();
 		//itero sui modelli 
 		for(int i=0;i<annotation.getModels().length;i++) {
 			Model model = annotation.getModels()[i];
@@ -44,6 +45,7 @@ public class SampleMatrix {
 				}
 				this.sampleArray[j].setBoxAtIndex(model.getBbox()[j], i);
 				this.sampleArray[j].setValueAtIndex(normalizedValue, i);
+				
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import it.unifi.domain.Bbox;
 
 public class Sample {
 
+	
 	private double[] ValueObject;
 	private Bbox[]   BoundingBox;
 	
@@ -35,6 +36,7 @@ public class Sample {
 	public void setBoxAtIndex(Bbox box, int index) {
 		this.BoundingBox[index] = box;
 	}
+	
 	
 	
 }
