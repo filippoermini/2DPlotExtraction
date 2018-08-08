@@ -1,33 +1,32 @@
 package it.unifi.export;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
+import java.util.Iterator;
 
 public class SampleMatrixList {
 
-	private Gson gson;
 	private ArrayList<SampleMatrix> matrixList;
-	
-	public SampleMatrixList() {
-		this.gson = new GsonBuilder().setPrettyPrinting().create();
+
+	public SampleMatrixList(){
 		this.matrixList = new ArrayList<SampleMatrix>();
 	}
 	
-	public void addMatrix(SampleMatrix sample) {
-		this.matrixList.add(sample);
+	public ArrayList<SampleMatrix> getMatrixList() {
+		return matrixList;
+	}
+
+	public void setMatrixList(ArrayList<SampleMatrix> matrixList) {
+		this.matrixList = matrixList;
 	}
 	
-	public String serialize() {
-		try {
-			return gson.toJson(matrixList);
-		} catch (JsonIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public SampleMatrix getSampleByIndex(int index){
+		Iterator<SampleMatrix> it = matrixList.iterator();
+		SampleMatrix sm;
+		while(it.hasNext()){
+			sm = it.next();
+			if(sm.getIndex() == index){
+				return sm;
+			}
 		}
 		return null;
 	}

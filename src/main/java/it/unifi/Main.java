@@ -4,7 +4,7 @@ import it.unifi.annotation.Parser;
 import it.unifi.domain.AnnotationLine;
 import it.unifi.domain.LineGraphList;
 import it.unifi.export.SampleMatrix;
-import it.unifi.export.SampleMatrixList;
+import it.unifi.export.SampleMatrixObject;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -24,7 +24,7 @@ public class Main {
 
 	    	LineGraphList graphList = Parser.readStream("annotations.json");
 	    	
-	    //-----------------------------------//
+	    	//-----------------------------------//
 	    	//  Statistiche sul numero di linee	//
 	    	//-----------------------------------//
 	    
@@ -42,7 +42,7 @@ public class Main {
 	    	}
 	    	Iterator itMap = lineMap.entrySet().iterator();
 	    	while (itMap.hasNext()) {
-	    		SampleMatrixList matrixList = new SampleMatrixList();
+	    		SampleMatrixObject matrixList = new SampleMatrixObject();
 	    		HashMap.Entry<Integer,LineGraphList> pair = (HashMap.Entry)itMap.next();
 	        System.out.println("Linee " + pair.getKey() + " : " + pair.getValue().getLineGraph().size()+" Grafici");
 	        Iterator<AnnotationLine> itGraph = pair.getValue().getLineGraph().iterator();
