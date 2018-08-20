@@ -22,7 +22,7 @@ public class Main {
 	
     public static void main(String[] args){
 
-	    	LineGraphList graphList = Parser.readStream("annotations.json");
+	    	LineGraphList graphList = Parser.readStream("annotations.json",false);
 	    	
 	    	//-----------------------------------//
 	    	//  Statistiche sul numero di linee	//
@@ -44,8 +44,8 @@ public class Main {
 	    	while (itMap.hasNext()) {
 	    		SampleMatrixObject matrixList = new SampleMatrixObject();
 	    		HashMap.Entry<Integer,LineGraphList> pair = (HashMap.Entry)itMap.next();
-	        System.out.println("Linee " + pair.getKey() + " : " + pair.getValue().getLineGraph().size()+" Grafici");
-	        Iterator<AnnotationLine> itGraph = pair.getValue().getLineGraph().iterator();
+	    		System.out.println("Linee " + pair.getKey() + " : " + pair.getValue().getLineGraph().size()+" Grafici");
+	    		Iterator<AnnotationLine> itGraph = pair.getValue().getLineGraph().iterator();
 	    		AnnotationLine annotationLineGraph;
 	    		while(itGraph.hasNext()) {
 	    			annotationLineGraph = itGraph.next();

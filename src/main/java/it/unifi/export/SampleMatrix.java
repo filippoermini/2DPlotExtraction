@@ -33,9 +33,9 @@ public class SampleMatrix {
 	}
 	
 	public void setSampleMatrix(AnnotationLine annotation) {
-		if(annotation.getImage_index() == 494){
-			System.out.println("cani");
-		}
+		//if(annotation.getImage_index() == 494){
+		//	System.out.println("cani");
+		//}
 		this.index = annotation.getImage_index();
 
 		Bbox xaxis = null;

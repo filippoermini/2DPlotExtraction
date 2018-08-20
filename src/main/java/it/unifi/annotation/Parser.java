@@ -14,13 +14,15 @@ import com.lowagie.text.pdf.codec.Base64.InputStream;
 
 import it.unifi.domain.Annotation;
 import it.unifi.domain.AnnotationLine;
+import it.unifi.domain.Bbox;
+import it.unifi.domain.GeneralFigureInfo;
 import it.unifi.domain.LineGraphList;
 import it.unifi.export.SampleMatrix;
 
 
 public class Parser {
 
-	public static LineGraphList readStream(String fileName) {
+	public static LineGraphList readStream(String fileName,boolean legend) {
 		LineGraphList graphList = new LineGraphList();
 		try {
 	    	
@@ -35,7 +37,17 @@ public class Parser {
 	            try {
 	            	AnnotationLine annotationLine = gson.fromJson(reader, AnnotationLine.class);
 	            	if(annotationLine.getType().contentEquals("line")) {
-	            		graphList.getLineGraph().add(annotationLine);
+	            		if(!legend){
+	            			//controllo se la legenda è interna la grafico 
+	            			GeneralFigureInfo plotInfo = (GeneralFigureInfo) annotationLine.getGeneral_figure_info();
+	            			Bbox plotBox = plotInfo.getPlot_info().getBbox();
+	            			Bbox legendBox = plotInfo.getLegend().getBbox();
+	            			if(!Bbox.isInternal(plotBox, legendBox)){
+	            				graphList.getLineGraph().add(annotationLine);
+	            			}
+	            			
+	            		}
+	            		
 	            		
 	            	}
 	            }catch(Exception e) {

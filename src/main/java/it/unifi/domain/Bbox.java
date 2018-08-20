@@ -31,5 +31,15 @@ public class Bbox {
 		this.h = h;
 	}
 	
+	public static boolean isInternal(Bbox box1,Bbox box2){
+		//restituisce vero se c'è un'intersezione tra i due box
+		if(
+				(box2.x >= box1.x && box2.x < (box1.x + box1.w)) &&
+				(box2.y >= box1.y && box2.y < (box1.y + box1.h))){
+			return true;
+		}
+		return false;
+	}
+	
 	
 }
