@@ -29,20 +29,27 @@ import it.unifi.export.SampleMatrix;
 
 public class Parser {
 
-	public static LineGraphList readStream(boolean legend,String[] jsonAnnotationFiles, String[] imageDirs, String destinationDir) {
+	public static LineGraphList readStream(boolean legend,String[] jsonAnnotationFiles, String[] imageDirs, String destinationDir,String[] types) {
 		LineGraphList graphList = new LineGraphList();
 		try {
 			int index = 0;
 			int prog = 1;
-			
-			File destFolder = new File(destinationDir);
-			if(!destFolder.exists()){
-				destFolder.mkdirs();
+			for(String type: types) {
+				File destFolder = new File(destinationDir+"/"+type);
+				if(!destFolder.exists()){
+					destFolder.mkdirs();
+				}
 			}
 			
+			
 	    	for(String json: jsonAnnotationFiles){
-	    		String imageDir = imageDirs[index++];
-		    	FileInputStream isInputStream = new FileInputStream(new File(json));
+	    		String imageDir = imageDirs[index];
+		    	String type = types[index];
+		    	
+		    	index++;
+		    	String _destinationDir = destinationDir +"/"+type;
+		    	
+	    		FileInputStream isInputStream = new FileInputStream(new File(json));
 		        JsonReader reader = new JsonReader(new InputStreamReader(isInputStream, "UTF-8"));
 		        Gson gson = new GsonBuilder().create();
 	
@@ -55,8 +62,14 @@ public class Parser {
 		            	if(annotationLine.getType().contentEquals("line")) {
 		            		//controllo l'esistenza dell'immagine
 		            		File image = new File(imageDir+"/"+annotationLine.getImage_index()+".png");
+		            		int numLines = annotationLine.getModels().length;
 	            			if(image.exists()){
-	            				
+	            				//creo la cartella relativa al numero di linee se non esiste già
+	            				File destFolder = new File(_destinationDir+"/"+numLines);
+	            				if(!destFolder.exists()){
+	            					destFolder.mkdirs();
+	            				}
+	            				String __destinationDir = _destinationDir+"/"+numLines;
 			            		if(!legend){
 			            			//controllo se la legenda è interna la grafico 
 			            			GeneralFigureInfo plotInfo = (GeneralFigureInfo) annotationLine.getGeneral_figure_info();
@@ -65,7 +78,7 @@ public class Parser {
 			            			if(!Bbox.isInternal(plotBox, legendBox)){
 			            				graphList.getLineGraph().add(annotationLine);
 			            				//sposto l'immagine nella cartella di destinazione e modifico l'indice dell'immagine
-			            				String pathTO = destinationDir + "/" + prog +".png";
+			            				String pathTO = __destinationDir + "/" + annotationLine.getImage_index() +".png";
 			            				String pathFrom = imageDir+"/"+annotationLine.getImage_index()+".png";
 			            				copyFile(pathFrom, pathTO);
 			            				annotationLine.setImage_index(prog++);
@@ -74,7 +87,7 @@ public class Parser {
 			            		}else{
 			            			graphList.getLineGraph().add(annotationLine);
 			            			//sposto l'immagine nella cartella di destinazione e modifico l'indice dell'immagine
-		            				String pathTO = destinationDir + "/" + prog +".png";
+		            				String pathTO = __destinationDir + "/" + annotationLine.getImage_index() +".png";
 		            				String pathFrom = imageDir+"/"+annotationLine.getImage_index()+".png";
 		            				copyFile(pathFrom, pathTO);
 		            				System.out.println("immagine "+pathTO+" creata");

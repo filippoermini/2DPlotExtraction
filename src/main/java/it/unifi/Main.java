@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import com.google.gson.Gson;
 
@@ -24,6 +25,7 @@ public class Main {
     	boolean legend = true;
 		String[] jsonFiles = new String[]{};
 		String[] imageDir  = new String[]{};
+		String[] types	   = new String[]{};
 		String destinationDir = "";
     	if(args.length==0){
             System.out.println("Arguments requires\n");
@@ -53,9 +55,14 @@ public class Main {
                 		destinationDir = args[i++];
                 	}
                 }
+                if(arg.contains("-t")){
+                	if(i < args.length){
+                		types = args[i++].split(",");
+                	}
+                }
     		}
     	}
-	    LineGraphList graphList = Parser.readStream(legend,jsonFiles,imageDir,destinationDir);
+	    LineGraphList graphList = Parser.readStream(legend,jsonFiles,imageDir,destinationDir,types);
     	
     	//-----------------------------------//
     	//  Statistiche sul numero di linee	//
@@ -76,7 +83,8 @@ public class Main {
     	Iterator itMap = lineMap.entrySet().iterator();
     	while (itMap.hasNext()) {
     		SampleMatrixObject matrixList = new SampleMatrixObject();
-    		HashMap.Entry<Integer,LineGraphList> pair = (HashMap.Entry)itMap.next();
+    		
+    		Map.Entry<Integer,LineGraphList> pair = (Map.Entry<Integer, LineGraphList>)itMap.next();
     		System.out.println("Linee " + pair.getKey() + " : " + pair.getValue().getLineGraph().size()+" Grafici");
     		Iterator<AnnotationLine> itGraph = pair.getValue().getLineGraph().iterator();
     		AnnotationLine annotationLineGraph;
