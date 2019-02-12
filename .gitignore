@@ -1,3 +1,5 @@
 /target/
 /bin/
 /annotations1.json
+/.classpath
+/.project
