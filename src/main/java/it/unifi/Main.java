@@ -16,6 +16,9 @@ import java.util.Map;
 import com.google.gson.Gson;
 
 /* COMMIT DA UBUNTU */ 
+/*
+ * -j /Volumes/KINGSTON/Dataset_tesi/training/annotations1.json,/Volumes/KINGSTON/Dataset_tesi/validation/validation1/annotations1.json,/Volumes/KINGSTON/Dataset_tesi/validation/validation2/annotations.json, -d /Volumes/KINGSTON/Dataset_tesi/training/png,/Volumes/KINGSTON/Dataset_tesi/validation/validation1/png,/Volumes/KINGSTON/Dataset_tesi/validation/validation2/png -D /Volumes/KINGSTON/Dataset_tesi/dataset_master -t training,testing,testing
+ */
 
 public class Main {
 
